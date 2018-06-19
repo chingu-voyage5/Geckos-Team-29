@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/chingu-voyage5/Geckos-Team-29#readme",
   "dependencies": {
+    "autoprefixer": "^8.6.3",
     "normalize.css": "^8.0.0",
     "postcss": "^6.0.22",
     "react": "^16.4.1",
