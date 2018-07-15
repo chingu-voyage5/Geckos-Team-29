@@ -1,16 +1,18 @@
 package com.geckos.springmvc.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.geckos.springmvc.auth.LoginCredentials;
 import com.geckos.springmvc.dao.EmployeeDAO;
 import com.geckos.springmvc.entity.Employee;
 import com.geckos.springmvc.service.EmployeeService;
 
-@Service
 @Transactional
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl implements EmployeeService, UserDetailsService{
 
 	@Autowired
 	private EmployeeDAO employeeDAO;
@@ -23,9 +25,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public Employee getEmployee(Employee employee) {
+	public Employee getEmployee(LoginCredentials loginCredentials) {
 
-		return employeeDAO.getEmployee(employee);
+		return employeeDAO.getEmployee(loginCredentials);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Employee getEmployeeByEmail(String email) {
+		return employeeDAO.getEmployeeByEmail(email);
 	}
 
 }

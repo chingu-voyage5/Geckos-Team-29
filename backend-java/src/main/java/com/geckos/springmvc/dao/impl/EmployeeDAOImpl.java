@@ -7,12 +7,11 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Repository;
 
+import com.geckos.springmvc.auth.LoginCredentials;
 import com.geckos.springmvc.dao.EmployeeDAO;
 import com.geckos.springmvc.entity.Employee;
 
-@Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Autowired
@@ -30,14 +29,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public Employee getEmployee(Employee employee) {
+	public Employee getEmployee(LoginCredentials loginCredentials) {
 		Session session = sessionFactory.openSession();
 		Criteria criteria = null;
 		Employee emp = null;
 		try {
 			criteria = session.createCriteria(Employee.class);
 			Criterion criterion = Restrictions.eq("email",
-					employee.getEmail());
+					loginCredentials.getEmail());
 			criteria.add(criterion);
 
 			criteria.setMaxResults(1);
@@ -49,7 +48,34 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 				session.close();
 			}
 		}
+		System.out.println(emp.getCompanyId());
+		System.out.println(emp.getEmail());
+		System.out.println(emp.getId());
+		System.out.println(emp.getName());
+		System.out.println(emp.getPassword());
+		System.out.println(emp.getSurname());
 		return emp;
 	}
 
-}
+	@Override
+	public Employee getEmployeeByEmail(String email) {
+		Session session = sessionFactory.openSession();
+		Criteria criteria = null;
+		Employee emp = null;
+		try {
+			criteria = session.createCriteria(Employee.class);
+			Criterion criterion = Restrictions.eq("email",email);
+			criteria.add(criterion);
+			criteria.setMaxResults(1);
+			emp = (Employee) criteria.uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return emp;
+	}
+	}
+

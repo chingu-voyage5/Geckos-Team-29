@@ -9,42 +9,52 @@
 	<name>geckos29</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<jackson.version>2.9.5</jackson.version>
+		<jackson.version>2.9.6</jackson.version>
+		<org.springframework.version>5.0.7.RELEASE</org.springframework.version>
+		<springsecurity.version>5.0.6.RELEASE</springsecurity.version>
+		<hibernate.version>5.3.2.Final</hibernate.version>
+		<javax.servlet>4.0.1</javax.servlet>
+		<slf4j>1.7.25</slf4j>
+		<myslq>8.0.11</myslq>
+		<jsonwebtoken>0.9.1</jsonwebtoken>
+		<findbugs>3.0.1</findbugs>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-			<scope>provided</scope>
+			<version>4.0.1</version>
+			<scope>${javax.servlet}</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.3.18.RELEASE</version>
+			<version>${org.springframework.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-crypto</artifactId>
-			<version>4.2.7.RELEASE</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>4.3.18.RELEASE</version>
+			<version>${org.springframework.version}</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.3.11.Final</version>
+			<version>${hibernate.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -59,12 +69,26 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.36</version>
+			<version>${myslq}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jsonwebtoken}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>annotations</artifactId>
+			<version>${findbugs}</version>
 		</dependency>
 
 	</dependencies>
 	<build>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -88,6 +112,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
 				<configuration>
 					<webResources>
 						<resource>
@@ -106,8 +131,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-
-
-		<finalName>springhibernatexml</finalName>
+		<finalName>gecko29</finalName>
 	</build>
 </project>
